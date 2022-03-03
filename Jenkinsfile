@@ -1,16 +1,20 @@
 pipeline {
     agent none
+    options {
+            skipDefaultCheckout()
+        }    
     stages {
         stage('Build') {
        agent {
             docker { 
-            label 'ec2-fleet'                
-            image 'node:16.13.1-alpine' 
+            label 'ec2-fleet'  
+            image 'node:16.13.1-alpine'
             reuseNode true
             }
         }            
             steps {
                 // sh 'whoami'
+                checkout scm
                 sh 'echo $GIT_COMMIT'                
                 sh 'sleep 20'
                 sh 'node --version'
@@ -25,6 +29,7 @@ pipeline {
             }
         }             
             steps {
+                checkout scm                
                 sh 'echo $GIT_COMMIT'
                 // sh 'whoami'
                 sh 'sleep 5'
