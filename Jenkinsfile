@@ -1,10 +1,9 @@
 pipeline {
-    agent none
+    agent { label 'ec2-fleet' }
     stages {
         stage('Build') {
        agent {
             docker { 
-            label 'ec2-fleet' 
             image 'node:16.13.1-alpine' 
             }
         }            
@@ -18,7 +17,6 @@ pipeline {
         stage('Deploy') {
        agent {
             docker { 
-            label 'ec2-fleet' 
             image 'node:16.13.1-alpine' 
             }
         }             
