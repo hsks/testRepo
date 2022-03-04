@@ -1,5 +1,6 @@
+def foo
 pipeline {
-    agent { label 'ec2-fleet' }
+    agent none
 //     options {
 //             skipDefaultCheckout()
 //         }    
@@ -7,11 +8,15 @@ pipeline {
         stage('Build') {
        agent {
            docker {
+            label 'ec2-fleet'
             image 'node:16.13.1-alpine'
             reuseNode true
            }
         }            
             steps {
+                script {
+                    foo = "hello"
+                }
                 // sh 'whoami'
                 sh 'echo $GIT_COMMIT'                
                 sh 'printenv'
@@ -20,14 +25,21 @@ pipeline {
                 sh 'cat dummy.txt'
             }
         }
+        stage('wait') {        
+            steps {     
+               input(message:'Proceed?')             
+            }
+        }          
         stage('Deploy') {
        agent {
            docker {
+            label 'ec2-fleet'
             image 'node:16.13.1-alpine'
             reuseNode true           
            }
-           }            
-            steps {     
+         }            
+            steps {
+                echo foo
                 sh 'echo $GIT_COMMIT'
                 // sh 'whoami'
                 sh 'sleep 5'
