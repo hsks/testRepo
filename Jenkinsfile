@@ -6,33 +6,26 @@ pipeline {
     stages {
         stage('Build') {
        agent {
-            docker { 
             label 'ec2-fleet'  
-            image 'node:16.13.1-alpine'
-            reuseNode true
-            }
         }            
             steps {
                 // sh 'whoami'
                 sh 'echo $GIT_COMMIT'                
                 sh 'printenv'
                 sh 'sleep 20'
-                sh 'node --version'
+                sh 'echo hello'
             }
         }
         stage('Deploy') {
        agent {
-            docker { 
-            label 'ec2-fleet'    
-            image 'node:16.13.1-alpine' 
-            reuseNode true                
+            label 'ec2-fleet'                
             }
         }             
             steps {     
                 sh 'echo $GIT_COMMIT'
                 // sh 'whoami'
                 sh 'sleep 5'
-                sh 'node --version'
+                sh 'echo hi'
                 sh 'printenv'
             }
         }        
