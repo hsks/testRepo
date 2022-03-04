@@ -15,7 +15,7 @@ pipeline {
             steps {
                 // sh 'whoami'
                 sh 'echo $GIT_COMMIT'                
-                echo env                
+                sh 'printenv'
                 sh 'sleep 20'
                 sh 'node --version'
             }
@@ -33,7 +33,7 @@ pipeline {
                 // sh 'whoami'
                 sh 'sleep 5'
                 sh 'node --version'
-                echo env
+                sh 'printenv'
             }
         }        
     }
