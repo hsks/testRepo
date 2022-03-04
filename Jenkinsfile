@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent { label 'ec2-fleet' }
 //     options {
 //             skipDefaultCheckout()
 //         }    
@@ -7,7 +7,6 @@ pipeline {
         stage('Build') {
        agent {
            docker {
-            label 'ec2-fleet'  
             image 'node:16.13.1-alpine'
             reuseNode true
            }
@@ -24,7 +23,6 @@ pipeline {
         stage('Deploy') {
        agent {
            docker {
-            label 'ec2-fleet'  
             image 'node:16.13.1-alpine'
             reuseNode true           
            }
