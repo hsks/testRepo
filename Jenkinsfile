@@ -1,8 +1,8 @@
 pipeline {
     agent none
-    options {
-            skipDefaultCheckout()
-        }    
+//     options {
+//             skipDefaultCheckout()
+//         }    
     stages {
         stage('Build') {
        agent {
@@ -14,8 +14,8 @@ pipeline {
         }            
             steps {
                 // sh 'whoami'
-                checkout scm
                 sh 'echo $GIT_COMMIT'                
+                echo env                
                 sh 'sleep 20'
                 sh 'node --version'
             }
@@ -28,12 +28,12 @@ pipeline {
             reuseNode true                
             }
         }             
-            steps {
-                checkout scm                
+            steps {     
                 sh 'echo $GIT_COMMIT'
                 // sh 'whoami'
                 sh 'sleep 5'
                 sh 'node --version'
+                echo env
             }
         }        
     }
