@@ -23,7 +23,6 @@ pipeline {
         stage('Deploy') {
        agent {
             label 'ec2-fleet'  
-            label 'ec2-fleet'
             image 'node:16.13.1-alpine'
             reuseNode true           
             }            
