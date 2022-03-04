@@ -19,8 +19,7 @@ pipeline {
         stage('Deploy') {
        agent {
             label 'ec2-fleet'                
-            }
-        }             
+            }            
             steps {     
                 sh 'echo $GIT_COMMIT'
                 // sh 'whoami'
