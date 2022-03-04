@@ -22,10 +22,12 @@ pipeline {
         }
         stage('Deploy') {
        agent {
+           docker {
             label 'ec2-fleet'  
             image 'node:16.13.1-alpine'
             reuseNode true           
-            }            
+           }
+           }            
             steps {     
                 sh 'echo $GIT_COMMIT'
                 // sh 'whoami'
