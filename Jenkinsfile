@@ -18,6 +18,7 @@ pipeline {
                 sh 'printenv'
                 sh 'sleep 20'
                 sh 'echo hello'
+                sh 'cat dummy.txt'
             }
         }
         stage('Deploy') {
@@ -34,6 +35,7 @@ pipeline {
                 sh 'sleep 5'
                 sh 'echo hi'
                 sh 'printenv'
+                sh 'cat dummy.txt'                
             }
         }        
     }
